@@ -1,0 +1,97 @@
+Testcase: 1
+	input: abcbda
+Starting the check.
+Index: 0 left: 0 right 0
+Checking for 97 in HashMap map[]
+97  not found!
+New left: 0  right: 1
+Updated HashMap map[97:{}]
+Updated result 1
+Index: 1 left: 0 right 1
+Checking for 98 in HashMap map[97:{}]
+98  not found!
+New left: 0  right: 2
+Updated HashMap map[97:{} 98:{}]
+Updated result 2
+Index: 2 left: 0 right 2
+Checking for 99 in HashMap map[97:{} 98:{}]
+99  not found!
+New left: 0  right: 3
+Updated HashMap map[97:{} 98:{} 99:{}]
+Updated result 3
+Index: 3 left: 0 right 3
+Checking for 98 in HashMap map[97:{} 98:{} 99:{}]
+98  found!, Removing from left
+Removing the 97 at index: 0
+Updated HashMap map[98:{} 99:{}]
+New left: 2  right: 4
+Updated HashMap map[98:{} 99:{}]
+Updated result 3
+Index: 4 left: 2 right 4
+Checking for 100 in HashMap map[98:{} 99:{}]
+100  not found!
+New left: 2  right: 5
+Updated HashMap map[98:{} 99:{} 100:{}]
+Updated result 3
+Index: 5 left: 2 right 5
+Checking for 97 in HashMap map[98:{} 99:{} 100:{}]
+97  not found!
+New left: 2  right: 6
+Updated HashMap map[97:{} 98:{} 99:{} 100:{}]
+Updated result 4
+	Expected: 4
+	Actual: 4
++ Testcase Pased!
+
+Testcase: 2
+	input: abcbdca
+Starting the check.
+Index: 0 left: 0 right 0
+Checking for 97 in HashMap map[]
+97  not found!
+New left: 0  right: 1
+Updated HashMap map[97:{}]
+Updated result 1
+Index: 1 left: 0 right 1
+Checking for 98 in HashMap map[97:{}]
+98  not found!
+New left: 0  right: 2
+Updated HashMap map[97:{} 98:{}]
+Updated result 2
+Index: 2 left: 0 right 2
+Checking for 99 in HashMap map[97:{} 98:{}]
+99  not found!
+New left: 0  right: 3
+Updated HashMap map[97:{} 98:{} 99:{}]
+Updated result 3
+Index: 3 left: 0 right 3
+Checking for 98 in HashMap map[97:{} 98:{} 99:{}]
+98  found!, Removing from left
+Removing the 97 at index: 0
+Updated HashMap map[98:{} 99:{}]
+New left: 2  right: 4
+Updated HashMap map[98:{} 99:{}]
+Updated result 3
+Index: 4 left: 2 right 4
+Checking for 100 in HashMap map[98:{} 99:{}]
+100  not found!
+New left: 2  right: 5
+Updated HashMap map[98:{} 99:{} 100:{}]
+Updated result 3
+Index: 5 left: 2 right 5
+Checking for 99 in HashMap map[98:{} 99:{} 100:{}]
+99  found!, Removing from left
+New left: 3  right: 6
+Updated HashMap map[98:{} 99:{} 100:{}]
+Updated result 3
+Index: 6 left: 3 right 6
+Checking for 97 in HashMap map[98:{} 99:{} 100:{}]
+97  not found!
+New left: 3  right: 7
+Updated HashMap map[97:{} 98:{} 99:{} 100:{}]
+Updated result 4
+	Expected: 4
+	Actual: 4
++ Testcase Pased!
+
+2 testcases passed out of 2
