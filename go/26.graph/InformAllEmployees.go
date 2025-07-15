@@ -32,7 +32,7 @@ func testInformEmployeesMain() {
 	for i, testCase := range testCases {
 		fmt.Println("Testcase:", i+1)
 		fmt.Println(testCase)
-		result := calcTimeToInform(testCase.N, testCase.HeadId, testCase.Managers, testCase.InformTime)
+		result := calcTimeToInformDFS(testCase.N, testCase.HeadId, testCase.Managers, testCase.InformTime)
 		fmt.Println("\tActual   :", result)
 
 		if testCase.validateResult(result) {
@@ -60,7 +60,60 @@ func fromManagersArrayToGraph(size int, managers []int) AdjacencyListGraph {
 	return graph
 }
 
-func calcTimeToInform(n, headId int, managers, informTime []int) int {
+func calcTimeToInformBFS(n, headId int, managers, informTime []int) int {
 	graph := fromManagersArrayToGraph(n, managers)
-	return headId
+	resultTime := 0
+
+	q := InformTimeQueue{}
+	q.Enqueue(InformTime{headId, resultTime})
+
+	for(q.isNotEmpty()) {
+		top, _ := q.Dequeue()
+		next_level := graph.list[top.employeeId]
+		if top.informTime > resultTime {
+			resultTime = top.informTime
+		}
+		nextLevelInformTime := top.informTime + informTime[top.employeeId]
+		for _, v := range next_level {
+			q.Enqueue(InformTime{v, nextLevelInformTime})
+		}
+	}
+
+	return resultTime
+}
+
+func calcTimeToInformDFS(n, headId int, managers, informTime []int) int {
+	graph := fromManagersArrayToGraph(n, managers)
+
+	var dfs func(int, int) int
+	dfs = func(employeeId int, timeTakenYet int) int {
+		subordinates := graph.list[employeeId]
+		if len(subordinates) == 0 {
+			return timeTakenYet
+		}
+		timeTakenYet += informTime[employeeId]
+		result := timeTakenYet
+		for _, emp := range subordinates {
+			result = max(dfs(emp, timeTakenYet), result)
+		}
+
+		return result
+	}
+
+	var dfs2 func(int) int
+	dfs2 = func(employeeId int) int {
+		subordinates := graph.list[employeeId]
+		if len(subordinates) == 0 {
+			return 0
+		}
+		result := 0
+		for _, emp := range subordinates {
+			result = max(dfs2(emp), result)
+		}
+
+		return informTime[employeeId] + result
+	}
+
+	// return dfs(headId, 0)
+	return dfs2(headId)
 }
